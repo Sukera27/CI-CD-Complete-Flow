@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: front
-        image: contenedoreskubev2/frontend:latest
+        image: contenedoreskubev2.azurecr.io/frontend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 80
