@@ -1,0 +1,29 @@
+version: "3.3"
+services:
+    front:
+        image: microfront
+        build:
+            context: microfront
+            dockerfile: ./Dockerfile
+        ports:
+            - "80:80"
+    client:
+        image: microclient
+        build:
+            context: microclient
+            dockerfile: ./Dockerfile
+        ports:
+            - "8000:8000"
+        environment:
+            - AUDIT_API=http://service:8080
+    service:
+        image: microservice
+        build:
+            context: microservice
+            dockerfile: ./Dockerfile
+        ports:
+            - "8080:8080"
+        environment:
+            - url= jdbc:mysql://serverprueba.mysql.database.azure.com:3306/simpsonsaudit?useSSL=true&verifyServerCertificate=false&allowPublicKeyRetrieval=true
+            - user=adminaz
+            - pass=Rafael27

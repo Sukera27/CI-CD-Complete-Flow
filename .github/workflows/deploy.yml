@@ -1,0 +1,44 @@
+name: CI Build and Push
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Login al Azure Container Registry
+    - name: Login to ACR
+      run: |
+        echo ${{ secrets.ACR_PASSWORD }} | docker login contenedoreskubev2.azurecr.io \
+        -u ${{ secrets.ACR_USERNAME }} --password-stdin
+
+    # ==========================
+    # BUILD JAVA MICROSERVICE
+    # ==========================
+
+    - name: Build JAR (Java)
+      run: |
+        cd simpsons
+        mvn clean package -DskipTests
+
+    - name: Build and push microservice image
+      run: |
+        docker build -t contenedoreskubev2.azurecr.io/microservice:latest ./simpsons
+        docker push contenedoreskubev2.azurecr.io/microservice:latest
+
+    # ==========================
+    # BUILD PYTHON CLIENT
+    # ==========================
+
+    - name: Build and push microclient image
+      run: |
+        docker build -t contenedoreskubev2.azurecr.io/microclient:latest ./microclient-python
+        docker push contenedoreskubev2.azurecr.io/microclient:latest
