@@ -42,15 +42,10 @@ jobs:
       run: |
         docker build -t contenedoreskubev2.azurecr.io/microclient:latest ./microclient
         docker push contenedoreskubev2.azurecr.io/microclient:latest
-        
+
     # ==========================
     # BUILD REACT FRONTEND
     # ==========================
-    - name: Build FRONTEND (REACT)
-      run: |
-        cd microfront
-        npm install
-        npm run build
     - name: Build and push frontend image
       run: |
         docker build -t contenedoreskubev2.azurecr.io/frontend:latest ./microfront
