@@ -40,5 +40,5 @@ jobs:
 
     - name: Build and push microclient image
       run: |
-        docker build -t contenedoreskubev2.azurecr.io/microclient:latest ./microclient-python
+        docker build -t contenedoreskubev2.azurecr.io/microclient:latest ./microclient
         docker push contenedoreskubev2.azurecr.io/microclient:latest
