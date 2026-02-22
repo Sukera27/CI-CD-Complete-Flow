@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: client
-        image: containerkube1.azurecr.io/microclient 
+        image: contenedoreskubev2.azurecr.io/microclient:latest 
         ports:
         - containerPort: 8000
         env: 
@@ -28,12 +28,12 @@ spec:
           - name: AUDIT_API.SAVE_ENDPOINT
             value: "/api/java/v1/simpson"
       - name: service
-        image: containerkube1.azurecr.io/microservice
+        image: contenedoreskubev2.azurecr.io/microservice:latest
         ports:
         - containerPort: 8080
         env:
         - name: url
-          value: jdbc:mysql://serverprueba.mysql.database.azure.com:3306/pokeaudit?useSSL=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+          value: jdbc:mysql://serverflexmysqlv1.mysql.database.azure.com:3306/pokeaudit?useSSL=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
         - name: user
           valueFrom:
             secretKeyRef:
